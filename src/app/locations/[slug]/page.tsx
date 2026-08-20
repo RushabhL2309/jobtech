@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container, PageHero } from "@/components/site/ui";
 import { locations, services } from "@/data/site";
+import { Reveal } from "@/components/site/Reveal";
 
 export function generateStaticParams() {
   return locations.map((s) => ({ slug: s.slug }));
@@ -28,6 +29,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
       <PageHero eyebrow="Locations" title={loc.h1} intro={loc.intro} />
       <section className="py-16">
         <Container className="max-w-3xl">
+          <Reveal>
           <h2 className="text-2xl">Service areas</h2>
           <p className="mt-3 text-sm text-muted-foreground">
             We mention these localities because they sit within the Mumbai Metropolitan Region we
@@ -46,6 +48,7 @@ export default async function LocationPage({ params }: { params: Promise<{ slug:
               <li key={s.slug}>{s.title}</li>
             ))}
           </ul>
+          </Reveal>
         </Container>
       </section>
     </>

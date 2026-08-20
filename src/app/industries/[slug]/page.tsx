@@ -5,6 +5,7 @@ import { Container, PageHero } from "@/components/site/ui";
 import { industries } from "@/data/site";
 import { industryPages } from "@/data/pages";
 import { industryVisuals } from "@/data/visuals";
+import { Reveal } from "@/components/site/Reveal";
 
 export function generateStaticParams() {
   return industries.map((s) => ({ slug: s.slug }));
@@ -36,6 +37,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <PageHero eyebrow="Industries" title={s.h1} image={industryVisuals[slug]?.photo} />
       <section className="bg-white py-16 lg:py-20">
         <Container className="max-w-3xl">
+          <Reveal>
           <h2 className="text-2xl">How we support this sector</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{body}</p>
@@ -45,6 +47,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           >
             Contact Us
           </Link>
+          </Reveal>
         </Container>
       </section>
     </>

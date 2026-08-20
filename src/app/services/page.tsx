@@ -9,6 +9,8 @@ import {
   Workflow,
 } from "lucide-react";
 import { CtaBand, Container, PageHero } from "@/components/site/ui";
+import { CoverImage } from "@/components/site/CoverImage";
+import { Reveal } from "@/components/site/Reveal";
 import { services } from "@/data/site";
 import { photos, serviceVisuals } from "@/data/visuals";
 
@@ -35,14 +37,13 @@ export default function ServicesHubPage() {
             const Icon = icons[i]!;
             const vis = serviceVisuals[s.slug]!;
             return (
+              <Reveal key={s.slug} delay={i * 70}>
               <Link
-                key={s.slug}
                 href={s.href}
                 className={`group overflow-hidden rounded-2xl border border-border bg-gradient-to-br ${vis.tint} shadow-soft transition hover:-translate-y-1 hover:shadow-lift`}
               >
                 <div className="relative h-36">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={vis.photo} alt="" className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                  <CoverImage src={vis.photo} alt="" sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw" quality={55} className="object-cover transition duration-700 group-hover:scale-105" />
                   <span className="absolute left-4 top-4 grid h-9 w-9 place-items-center rounded-xl bg-[#0b1f3a] text-xs font-bold tracking-[0.16em] text-white">
                     {s.number}
                   </span>
@@ -55,14 +56,17 @@ export default function ServicesHubPage() {
                   <p className="mt-3 text-sm text-muted-foreground">{s.summary}</p>
                 </div>
               </Link>
+              </Reveal>
             );
           })}
         </Container>
       </section>
+      <Reveal>
       <CtaBand
         title="Need manpower, payroll or compliance support?"
         intro="Share your requirement. We will propose a service mix."
       />
+      </Reveal>
     </>
   );
 }

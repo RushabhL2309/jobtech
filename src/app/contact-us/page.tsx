@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Container, PageHero } from "@/components/site/ui";
+import { Reveal } from "@/components/site/Reveal";
 import { company, services } from "@/data/site";
 import { photos } from "@/data/visuals";
 
@@ -20,6 +21,7 @@ export default function ContactPage() {
       />
       <section className="py-12 sm:py-16 lg:py-20">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal>
           <div>
             <h2 className="text-2xl">Mumbai Office</h2>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{company.address}</p>
@@ -33,6 +35,8 @@ export default function ContactPage() {
               to submit your resume.
             </p>
           </div>
+          </Reveal>
+          <Reveal delay={80}>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -114,6 +118,7 @@ export default function ContactPage() {
               {sent ? "Thank you — we will be in touch" : busy ? "Submitting…" : "Submit consultation request"}
             </button>
           </form>
+          </Reveal>
         </Container>
       </section>
     </>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container, PageHero } from "@/components/site/ui";
 import { clients, footerLocations } from "@/data/site";
 import { photos } from "@/data/visuals";
+import { Reveal } from "@/components/site/Reveal";
 
 export const metadata: Metadata = {
   title: "Our Clients & Industry Experience",
@@ -21,15 +22,17 @@ export default function ClientsPage() {
       <section className="py-16">
         <Container>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            {clients.map((c) => (
+            {clients.map((c, i) => (
+              <Reveal key={c} delay={(i % 8) * 40}>
               <div
-                key={c}
                 className="grid min-h-24 place-items-center rounded-xl border border-violet-100 bg-gradient-to-br from-white to-violet-50 px-4 text-center text-sm font-semibold text-brand shadow-soft"
               >
                 {c}
               </div>
+              </Reveal>
             ))}
           </div>
+          <Reveal>
           <h2 className="mt-16 text-2xl">Selected client locations</h2>
           <ul className="mt-5 flex flex-wrap gap-2">
             {["Mumbai", "Navi Mumbai", "Panvel", "Chembur", "Vikhroli", "Bandra", "Andheri"].map(
@@ -51,6 +54,7 @@ export default function ClientsPage() {
               </span>
             ))}
           </p>
+          </Reveal>
         </Container>
       </section>
     </>

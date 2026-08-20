@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CtaBand, Container, PageHero } from "@/components/site/ui";
+import { Reveal } from "@/components/site/Reveal";
 import ComplianceAreas from "@/components/site/ComplianceAreas";
 import { services } from "@/data/site";
 import { servicePages } from "@/data/pages";
@@ -35,18 +36,20 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           <div className="pointer-events-none absolute -left-16 top-10 h-56 w-56 rounded-full bg-violet-400/25 blur-3xl" />
           <div className="pointer-events-none absolute -right-10 bottom-0 h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl" />
           <Container className="relative max-w-6xl">
+            <Reveal>
             <p className="mb-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
               {content.sections[0]?.body}
             </p>
             <ComplianceAreas />
+            </Reveal>
           </Container>
         </section>
       ) : (
         <section className="py-16">
           <Container className="mx-auto grid max-w-3xl gap-6">
             {content.sections.map((sec, i) => (
+              <Reveal key={sec.title} delay={i * 70}>
               <article
-                key={sec.title}
                 className={`rounded-2xl border border-border p-6 shadow-soft ${
                   i % 2 === 0
                     ? "bg-gradient-to-br from-violet-50 to-white"
@@ -56,8 +59,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                 <h2 className="text-2xl">{sec.title}</h2>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{sec.body}</p>
               </article>
+              </Reveal>
             ))}
             {content.faqs?.length ? (
+              <Reveal>
               <div className="mt-12">
                 <h2 className="text-2xl">FAQs</h2>
                 <div className="mt-6 space-y-4">
@@ -69,14 +74,17 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
                   ))}
                 </div>
               </div>
+              </Reveal>
             ) : null}
           </Container>
         </section>
       )}
+      <Reveal>
       <CtaBand
         title={`Talk to us about ${s.title}`}
         intro={s.summary}
       />
+      </Reveal>
     </>
   );
 }

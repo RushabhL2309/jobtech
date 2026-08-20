@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { industries } from "@/data/site";
 import { industryVisuals } from "@/data/visuals";
+import { CoverImage } from "@/components/site/CoverImage";
 
 const hoverFills = [
   "from-[#4b2c84]/95 via-violet-700/90 to-blue-900/90",
@@ -25,12 +26,15 @@ function SectorCard({
       href={industry.href}
       className="group relative h-64 w-60 shrink-0 overflow-hidden rounded-2xl shadow-soft sm:h-80 sm:w-72"
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={vis?.photo}
-        alt={industry.title}
-        className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-      />
+      {vis?.photo ? (
+        <CoverImage
+          src={vis.photo}
+          alt={industry.title}
+          sizes="288px"
+          quality={55}
+          className="object-cover transition duration-700 group-hover:scale-110"
+        />
+      ) : null}
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent transition duration-500 group-hover:opacity-0" />
       <div
         className={`absolute inset-0 bg-gradient-to-br opacity-0 transition duration-500 group-hover:opacity-100 ${fill}`}

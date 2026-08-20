@@ -13,6 +13,47 @@ function seededJobs(): Job[] {
   }));
 }
 
+function plainJob(doc: Job): Job {
+  return {
+    id: String(doc.id),
+    title: String(doc.title),
+    location: String(doc.location),
+    type: String(doc.type),
+    industry: String(doc.industry),
+    pay: String(doc.pay),
+    summary: String(doc.summary ?? ""),
+  };
+}
+
+function plainEnquiry(doc: Enquiry): Enquiry {
+  return {
+    id: String(doc.id),
+    name: String(doc.name),
+    company: String(doc.company ?? ""),
+    phone: String(doc.phone),
+    email: String(doc.email ?? ""),
+    city: String(doc.city ?? ""),
+    service: String(doc.service ?? ""),
+    workforce: String(doc.workforce ?? ""),
+    message: String(doc.message ?? ""),
+    createdAt: String(doc.createdAt),
+  };
+}
+
+function plainApplication(doc: Application): Application {
+  return {
+    id: String(doc.id),
+    name: String(doc.name),
+    phone: String(doc.phone),
+    email: String(doc.email ?? ""),
+    role: String(doc.role),
+    message: String(doc.message ?? ""),
+    resumeUrl: String(doc.resumeUrl ?? ""),
+    resumeName: String(doc.resumeName ?? ""),
+    createdAt: String(doc.createdAt),
+  };
+}
+
 async function jobsCol() {
   return (await getDb()).collection<Job>("jobs");
 }
@@ -28,11 +69,11 @@ async function applicationsCol() {
 export async function getJobs(): Promise<Job[]> {
   try {
     const col = await jobsCol();
+    const list = await col.find({}).sort({ _id: -1 }).toArray();
+    if (list.length) return list.map(plainJob);
     const seed = seededJobs();
-    for (const job of seed) {
-      await col.updateOne({ id: job.id }, { $setOnInsert: job }, { upsert: true });
-    }
-    return col.find({}).sort({ createdAt: -1, _id: -1 }).toArray();
+    if (seed.length) await col.insertMany(seed);
+    return seed.map(plainJob);
   } catch (err) {
     console.error("Mongo getJobs failed:", err);
     return seededJobs();
@@ -52,7 +93,7 @@ export async function deleteJob(id: string): Promise<boolean> {
 
 export async function getEnquiries(): Promise<Enquiry[]> {
   try {
-    return (await enquiriesCol()).find({}).sort({ createdAt: -1 }).toArray();
+    return (await enquiriesCol()).find({}).sort({ createdAt: -1 }).toArray().then((rows) => rows.map(plainEnquiry));
   } catch (err) {
     console.error("Mongo getEnquiries failed:", err);
     return [];
@@ -67,7 +108,7 @@ export async function addEnquiry(input: Omit<Enquiry, "id" | "createdAt">): Prom
 
 export async function getApplications(): Promise<Application[]> {
   try {
-    return (await applicationsCol()).find({}).sort({ createdAt: -1 }).toArray();
+    return (await applicationsCol()).find({}).sort({ createdAt: -1 }).toArray().then((rows) => rows.map(plainApplication));
   } catch (err) {
     console.error("Mongo getApplications failed:", err);
     return [];

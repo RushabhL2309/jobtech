@@ -2,6 +2,7 @@ import Link from "next/link";
 import { type ReactNode } from "react";
 import { jobs } from "@/data/site";
 import { photos } from "@/data/visuals";
+import { CoverImage } from "@/components/site/CoverImage";
 
 export function Container({
   children,
@@ -59,14 +60,10 @@ export function PageHero({
 }) {
   return (
     <section className="relative flex min-h-[42svh] items-end overflow-hidden pt-24 pb-10 sm:min-h-[52svh] sm:pt-28 sm:pb-16 lg:min-h-[58svh] lg:pt-32 lg:pb-20">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={image}
-        alt=""
-        className="absolute inset-0 h-full w-full object-cover object-center"
-      />
+      <CoverImage src={image} alt="" priority sizes="100vw" quality={65} className="object-cover object-center" />
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/62 to-slate-950/25" />
       <Container className="relative">
+        <div className="animate-hero-in">
         {eyebrow ? (
           <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-cyan-200 sm:text-[0.72rem]">
             {eyebrow}
@@ -76,6 +73,7 @@ export function PageHero({
         {intro ? (
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base lg:text-lg">{intro}</p>
         ) : null}
+        </div>
       </Container>
     </section>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
+import { Reveal } from "@/components/site/Reveal";
 import { Container, PageHero } from "@/components/site/ui";
 import { JobCardGrid } from "@/components/site/JobSlider";
 import ApplyForm from "@/components/site/ApplyForm";
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
     "Current job listings for hospitality, corporate, logistics and compliance roles recruited and deployed by Jobtech in Mumbai and surrounding regions.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function CareersPage() {
   let jobs: Awaited<ReturnType<typeof getJobs>> = [];
@@ -33,11 +34,14 @@ export default async function CareersPage() {
       <section className="relative overflow-hidden bg-ink py-16 lg:py-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(15,23,42,0.45),transparent_45%),radial-gradient(circle_at_10%_90%,rgba(6,182,212,0.18),transparent_40%)]" />
         <Container className="relative">
-          <JobCardGrid jobs={jobs} />
+          <Reveal>
+            <JobCardGrid jobs={jobs} />
+          </Reveal>
         </Container>
       </section>
       <section className="bg-[#f4f2f7] py-16 lg:py-20">
         <Container className="max-w-3xl">
+          <Reveal>
           <Suspense fallback={<div className="h-64 rounded-2xl bg-white" />}>
             <ApplyForm jobs={jobs} />
           </Suspense>
@@ -48,6 +52,7 @@ export default async function CareersPage() {
             </Link>
             .
           </p>
+          </Reveal>
         </Container>
       </section>
     </>

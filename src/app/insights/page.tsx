@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, PageHero } from "@/components/site/ui";
 import { insights } from "@/data/site";
+import { Reveal } from "@/components/site/Reveal";
 
 export const metadata: Metadata = {
   title: "Insights & Resources",
@@ -19,9 +20,9 @@ export default function InsightsPage() {
       />
       <section className="py-16">
         <Container className="grid gap-5 md:grid-cols-2">
-          {insights.map((a) => (
+          {insights.map((a, i) => (
+            <Reveal key={a.slug} delay={i * 70}>
             <Link
-              key={a.slug}
               href={`/insights/${a.slug}`}
               className="rounded-2xl border border-border bg-card p-7 hover:border-brand"
             >
@@ -31,6 +32,7 @@ export default function InsightsPage() {
               <h2 className="mt-3 text-xl">{a.title}</h2>
               <p className="mt-3 text-sm text-muted-foreground">{a.excerpt}</p>
             </Link>
+            </Reveal>
           ))}
         </Container>
       </section>

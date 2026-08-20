@@ -22,7 +22,7 @@ const whyIcons = [Award, Workflow, ShieldCheck, Handshake, Sparkles, Building2];
 
 const whyCardFill = "from-[#2a1658] via-brand to-cyan-600";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function HomePage() {
   let jobs: Awaited<ReturnType<typeof getJobs>> = [];
@@ -39,15 +39,17 @@ export default async function HomePage() {
 
       <section className="bg-[#f4f2f7] py-14 sm:py-20 lg:py-32">
         <Container>
-          <SectionHeading
-            eyebrow="Why Jobtech"
-            title="A clearer way to run workforce operations"
-          />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Why Jobtech"
+              title="A clearer way to run workforce operations"
+            />
+          </Reveal>
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {whyPoints.map((p, i) => {
               const Icon = whyIcons[i]!;
               return (
-                <Reveal key={p.number} delay={i * 50} className="h-full">
+                <Reveal key={p.number} delay={i * 80} className="h-full">
                   <article
                     className={`group h-full rounded-2xl bg-gradient-to-br p-6 text-white shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-lift ${whyCardFill}`}
                   >
@@ -70,59 +72,75 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-ink py-14 text-white sm:py-20 lg:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(124,58,237,0.35),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(20,184,166,0.25),transparent_40%)]" />
         <Container className="relative">
-          <div className="mb-8 flex flex-col items-start gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <SectionHeading
-              light
-              eyebrow="Sectors"
-              title="Workforce solutions across diverse industries"
-            />
-            <Link href="/industries" className="text-sm font-semibold text-cyan-300">
-              View all →
-            </Link>
-          </div>
+          <Reveal>
+            <div className="mb-8 flex flex-col items-start gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <SectionHeading
+                light
+                eyebrow="Sectors"
+                title="Workforce solutions across diverse industries"
+              />
+              <Link href="/industries" className="text-sm font-semibold text-cyan-300">
+                View all →
+              </Link>
+            </div>
+          </Reveal>
         </Container>
-        <div className="relative mt-2">
-          <SectorMarquee />
-        </div>
+        <Reveal>
+          <div className="relative mt-2">
+            <SectorMarquee />
+          </div>
+        </Reveal>
       </section>
 
       <section className="overflow-hidden bg-[#f4f2f7] py-14 sm:py-20 lg:py-28">
         <Container>
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <SectionHeading eyebrow="Clients" title="Organisations we have supported" />
-            <Link href="/clients" className="text-sm font-semibold text-brand">
-              View clients →
-            </Link>
-          </div>
+          <Reveal>
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <SectionHeading eyebrow="Clients" title="Organisations we have supported" />
+              <Link href="/clients" className="text-sm font-semibold text-brand">
+                View clients →
+              </Link>
+            </div>
+          </Reveal>
         </Container>
-        <div className="mt-12">
-          <ClientMarquee />
-        </div>
+        <Reveal delay={80}>
+          <div className="mt-12">
+            <ClientMarquee />
+          </div>
+        </Reveal>
       </section>
 
       <section className="bg-white py-14 sm:py-20 lg:py-28">
         <Container>
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-            <SectionHeading
-              eyebrow="Compliance"
-              title="Statutory areas we support"
-              intro="Payroll, labour and establishment requirements — scoped to what applies to each client."
-            />
-            <Link
-              href="/services/labour-law-compliance"
-              className="text-sm font-semibold text-brand sm:shrink-0"
-            >
-              View all →
-            </Link>
-          </div>
-          <div className="mt-12">
-            <CompliancePreview />
-          </div>
+          <Reveal>
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+              <SectionHeading
+                eyebrow="Compliance"
+                title="Statutory areas we support"
+                intro="Payroll, labour and establishment requirements — scoped to what applies to each client."
+              />
+              <Link
+                href="/services/labour-law-compliance"
+                className="text-sm font-semibold text-brand sm:shrink-0"
+              >
+                View all →
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="mt-12">
+              <CompliancePreview />
+            </div>
+          </Reveal>
         </Container>
       </section>
 
-      <JobSlider jobs={jobs} />
-      <CtaBand />
+      <Reveal>
+        <JobSlider jobs={jobs} />
+      </Reveal>
+      <Reveal>
+        <CtaBand />
+      </Reveal>
     </>
   );
 }

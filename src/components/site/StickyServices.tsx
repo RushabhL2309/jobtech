@@ -6,8 +6,8 @@ import { Container, SectionHeading } from "@/components/site/ui";
 export function StickyServices() {
   return (
     <section className="bg-white">
-      <Container className="grid lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.4fr)] lg:gap-16">
-        <div className="py-10 lg:sticky lg:top-24 lg:flex lg:h-auto lg:min-h-[12rem] lg:flex-col lg:justify-center lg:self-start lg:py-16">
+      <Container className="lg:flex lg:items-start lg:gap-16">
+        <div className="py-10 lg:sticky lg:top-28 lg:flex lg:h-[calc(100svh-7rem)] lg:w-[min(22rem,38%)] lg:shrink-0 lg:flex-col lg:justify-center lg:py-0">
           <SectionHeading eyebrow="Services" title="What we do" />
           <Link
             href="/services"
@@ -17,12 +17,12 @@ export function StickyServices() {
           </Link>
         </div>
 
-        <div className="flex flex-col gap-3 pb-16 sm:gap-4 lg:py-16 lg:pb-[20vh]">
+        <div className="flex min-w-0 flex-1 flex-col gap-4 pb-16 pt-2 lg:gap-5 lg:py-28 lg:pb-40">
           {services.map((s) => (
             <Link
               key={s.slug}
               href={s.href}
-              className="group relative flex min-h-0 items-center justify-between gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-[#eef2f6] px-4 py-4 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-lift sm:min-h-[7.5rem] sm:gap-6 sm:px-5 sm:py-6 lg:min-h-[9.5rem] lg:px-6"
+              className="group relative flex min-h-[6.5rem] items-center justify-between gap-3 overflow-hidden rounded-2xl border border-slate-200/80 bg-[#eef2f6] px-4 py-5 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-lift sm:min-h-[8rem] sm:gap-6 sm:px-5 sm:py-6 lg:min-h-[10.5rem] lg:px-8"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#0b1f3a] via-slate-800 to-cyan-800 opacity-0 transition duration-300 group-hover:opacity-100" />
               <span className="relative flex min-w-0 items-center gap-3 sm:gap-5">

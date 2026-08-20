@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container, PageHero } from "@/components/site/ui";
 import { insights } from "@/data/site";
+import { Reveal } from "@/components/site/Reveal";
 
 export function generateStaticParams() {
   return insights.map((s) => ({ slug: s.slug }));
@@ -28,6 +29,7 @@ export default async function InsightArticle({ params }: { params: Promise<{ slu
       <PageHero eyebrow={a.category} title={a.title} intro={a.excerpt} />
       <section className="py-16">
         <Container className="max-w-3xl space-y-4 text-sm leading-relaxed text-muted-foreground">
+          <Reveal>
           <p>
             This article is written for employers evaluating {a.category.toLowerCase()} in the
             Mumbai region. Jobtech can support related processes through manpower staffing, payroll
@@ -42,6 +44,7 @@ export default async function InsightArticle({ params }: { params: Promise<{ slu
             For a structured discussion of your workforce or compliance calendar, request a
             consultation and we will scope the work against the statutes that actually apply.
           </p>
+          </Reveal>
         </Container>
       </section>
     </>

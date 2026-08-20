@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { company } from "@/data/site";
 import { photos } from "@/data/visuals";
+import { CoverImage } from "@/components/site/CoverImage";
 
 const slides = [
   {
@@ -39,7 +40,18 @@ const slides = [
 export default function HeroSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [loaded, setLoaded] = useState([true, false, false]);
   const last = slides.length - 1;
+
+  useEffect(() => {
+    const next = index === last ? 0 : index + 1;
+    setLoaded((prev) => {
+      if (prev[next]) return prev;
+      const copy = [...prev];
+      copy[next] = true;
+      return copy;
+    });
+  }, [index, last]);
 
   useEffect(() => {
     if (paused) return;
@@ -57,24 +69,31 @@ export default function HeroSlider() {
       onTouchStart={() => setPaused(true)}
       onTouchEnd={() => setPaused(false)}
     >
-      {slides.map((slide, i) => (
-        <div
-          key={slide.title}
-          className={`absolute inset-0 transition-opacity duration-700 ${
-            i === index ? "opacity-100" : "pointer-events-none opacity-0"
-          }`}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={slide.image}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
-          />
-          <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
-        </div>
-      ))}
+      {slides.map((slide, i) =>
+        loaded[i] ? (
+          <div
+            key={slide.title}
+            className={`absolute inset-0 transition-opacity duration-700 ${
+              i === index ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+          >
+            <CoverImage
+              src={slide.image}
+              alt=""
+              priority={i === 0}
+              quality={65}
+              sizes="100vw"
+              className="object-cover object-[center_30%]"
+            />
+            <div className={`absolute inset-0 bg-gradient-to-r ${slide.overlay}`} />
+          </div>
+        ) : null,
+      )}
 
-      <div className="relative z-[1] mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pt-24 pb-20 sm:px-5 sm:pt-28 sm:pb-24 lg:px-8">
+      <div
+        key={index}
+        className="animate-hero-in relative z-[1] mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-center px-4 pt-24 pb-20 sm:px-5 sm:pt-28 sm:pb-24 lg:px-8"
+      >
         <p className="max-w-[20rem] text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-cyan-200 sm:max-w-none sm:text-[0.7rem] sm:tracking-[0.28em]">
           {slides[index]!.eyebrow}
         </p>
