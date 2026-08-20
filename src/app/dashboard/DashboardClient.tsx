@@ -65,7 +65,7 @@ export default function DashboardClient({
   ];
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
+    <div className="mx-auto max-w-6xl px-4 py-6 sm:py-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Jobtech</p>
@@ -97,7 +97,7 @@ export default function DashboardClient({
 
       {tab === "jobs" ? (
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,20rem)_1fr]">
-          <form onSubmit={addJob} className="h-fit rounded-2xl border border-slate-200 bg-white p-6">
+          <form onSubmit={addJob} className="h-fit rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
             <h2 className="text-lg font-semibold">Add a job</h2>
             {[
               ["title", "Job title"],
@@ -236,14 +236,18 @@ export default function DashboardClient({
                     </td>
                     <td className="max-w-xs px-4 py-3 text-slate-600">{row.message || "—"}</td>
                     <td className="px-4 py-3">
-                      <a
-                        href={row.resumeUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-cyan-700 underline"
-                      >
-                        {row.resumeName || "View CV"}
-                      </a>
+                      {row.resumeUrl ? (
+                        <a
+                          href={row.resumeUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-semibold text-cyan-700 underline"
+                        >
+                          {row.resumeName || "View CV"}
+                        </a>
+                      ) : (
+                        <span className="text-slate-400">{row.resumeName || "—"}</span>
+                      )}
                     </td>
                   </tr>
                 ))

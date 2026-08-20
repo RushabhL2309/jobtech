@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { addApplication, getApplications } from "@/lib/store";
 import { requireDashboard } from "@/lib/require-auth";
 import { sendApplicationMail } from "@/lib/mail";
+import { resumeDir, resumePublicPath } from "@/lib/uploads";
 
 export const dynamic = "force-dynamic";
 
@@ -43,20 +44,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Upload a PDF or Word document" }, { status: 400 });
   }
 
-  const dir = path.join(process.cwd(), "public", "uploads", "resumes");
-  await mkdir(dir, { recursive: true });
   const filename = `${Date.now()}-${safeName(resume.name || "resume.pdf")}`;
   const buf = Buffer.from(await resume.arrayBuffer());
+  const dir = resumeDir();
+  await mkdir(dir, { recursive: true });
   await writeFile(path.join(dir, filename), buf);
 
-  const resumeUrl = `/uploads/resumes/${filename}`;
   const row = await addApplication({
     name,
     phone,
     email,
     role,
     message,
-    resumeUrl,
+    resumeUrl: resumePublicPath(filename),
     resumeName: resume.name || filename,
   });
   await sendApplicationMail({

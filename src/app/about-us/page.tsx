@@ -18,9 +18,9 @@ export default function AboutPage() {
         eyebrow="About Us"
         title="About Jobtech Hospitality & Management Services"
       />
-      <section className="bg-white py-16 lg:py-20">
+      <section className="bg-white py-12 lg:py-20">
         <Container className="max-w-3xl">
-          <h2 className="text-3xl">Experience built over decades</h2>
+          <h2 className="text-2xl sm:text-3xl">Experience built over decades</h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             {company.legalName} is a Mumbai-based workforce and HR services company established in{" "}
             {company.established}. From our office in Govandi we support organisations across Mumbai, Navi
@@ -36,7 +36,7 @@ export default function AboutPage() {
       </section>
       <section className="bg-white pb-16 lg:pb-20">
         <Container>
-          <h2 className="text-3xl">What we actually do</h2>
+          <h2 className="text-2xl sm:text-3xl">What we actually do</h2>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             Six service lines, used together or on their own, depending on what the client needs.
           </p>
@@ -56,9 +56,9 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
-      <section className="bg-[#f4f2f7] py-16 lg:py-20">
+      <section className="bg-[#f4f2f7] py-12 lg:py-20">
         <Container>
-          <h2 className="text-3xl">Why organisations work with us</h2>
+          <h2 className="text-2xl sm:text-3xl">Why organisations work with us</h2>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             Integrated workforce, payroll and compliance support — scoped to each client, not a generic
             catalogue.
@@ -78,7 +78,7 @@ export default function AboutPage() {
       </section>
       <section className="bg-white py-16">
         <Container>
-          <h2 className="text-3xl">Our approach</h2>
+          <h2 className="text-2xl sm:text-3xl">Our approach</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {[
               { t: "People", b: "Recruiting, documenting and deploying dependable workforce against the client's role profile." },

@@ -31,7 +31,7 @@ const industryLabels: Record<string, string> = {
 export function Footer() {
   return (
     <footer className="bg-slate-950 text-white">
-      <div className="mx-auto max-w-7xl px-5 py-14 lg:px-8 lg:py-16">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-5 lg:px-8 lg:py-16">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="relative h-12 w-40 rounded-md bg-white px-2">
@@ -74,7 +74,7 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-white/75">
               <li className="flex gap-2.5">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-cyan-300" />
-                <span>{company.address}</span>
+                <span className="break-words">{company.address}</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="h-4 w-4 shrink-0 text-cyan-300" />
@@ -121,7 +121,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-white/50 sm:flex-row sm:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-5 pb-24 text-xs text-white/50 sm:flex-row sm:justify-between sm:px-5 sm:pb-5 lg:px-8">
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>

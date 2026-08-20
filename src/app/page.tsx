@@ -25,14 +25,19 @@ const whyCardFill = "from-[#2a1658] via-brand to-cyan-600";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const jobs = await getJobs();
+  let jobs: Awaited<ReturnType<typeof getJobs>> = [];
+  try {
+    jobs = await getJobs();
+  } catch (err) {
+    console.error("getJobs failed:", err);
+  }
   return (
     <>
       <HeroSlider />
 
       <StickyServices />
 
-      <section className="bg-[#f4f2f7] py-24 lg:py-32">
+      <section className="bg-[#f4f2f7] py-14 sm:py-20 lg:py-32">
         <Container>
           <SectionHeading
             eyebrow="Why Jobtech"
@@ -62,16 +67,16 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-28">
+      <section className="relative overflow-hidden bg-ink py-14 text-white sm:py-20 lg:py-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(124,58,237,0.35),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(20,184,166,0.25),transparent_40%)]" />
         <Container className="relative">
-          <div className="mb-12 flex items-end justify-between gap-6">
+          <div className="mb-8 flex flex-col items-start gap-3 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <SectionHeading
               light
               eyebrow="Sectors"
               title="Workforce solutions across diverse industries"
             />
-            <Link href="/industries" className="hidden text-sm font-semibold text-cyan-300 sm:block">
+            <Link href="/industries" className="text-sm font-semibold text-cyan-300">
               View all →
             </Link>
           </div>
@@ -81,11 +86,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="overflow-hidden bg-[#f4f2f7] py-24 lg:py-28">
+      <section className="overflow-hidden bg-[#f4f2f7] py-14 sm:py-20 lg:py-28">
         <Container>
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <SectionHeading eyebrow="Clients" title="Organisations we have supported" />
-            <Link href="/clients" className="hidden text-sm font-semibold text-brand sm:block">
+            <Link href="/clients" className="text-sm font-semibold text-brand">
               View clients →
             </Link>
           </div>
@@ -95,9 +100,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-24 lg:py-28">
+      <section className="bg-white py-14 sm:py-20 lg:py-28">
         <Container>
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <SectionHeading
               eyebrow="Compliance"
               title="Statutory areas we support"
@@ -105,7 +110,7 @@ export default async function HomePage() {
             />
             <Link
               href="/services/labour-law-compliance"
-              className="hidden text-sm font-semibold text-brand sm:block"
+              className="text-sm font-semibold text-brand sm:shrink-0"
             >
               View all →
             </Link>

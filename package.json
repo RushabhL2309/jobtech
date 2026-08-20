@@ -1,15 +1,18 @@
 {
   "name": "goldleaf-retreat-web-next",
   "version": "0.1.0",
-  "private": true,
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "seed:jobs": "node scripts/seed-jobs.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.575.0",
+    "mongodb": "^6.21.0",
     "next": "^16.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

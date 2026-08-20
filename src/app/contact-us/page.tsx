@@ -18,7 +18,7 @@ export default function ContactPage() {
         title="Contact Jobtech"
         intro="Request a consultation for manpower, payroll, HR outsourcing or labour compliance. For job applications, please use the Careers page."
       />
-      <section className="py-16 lg:py-20">
+      <section className="py-12 sm:py-16 lg:py-20">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <h2 className="text-2xl">Mumbai Office</h2>
@@ -62,7 +62,7 @@ export default function ContactPage() {
               setSent(true);
               form.reset();
             }}
-            className="rounded-2xl border border-border bg-card p-8 shadow-soft"
+            className="rounded-2xl border border-border bg-card p-5 shadow-soft sm:p-8"
           >
             <h2 className="text-2xl">Request a Service Consultation</h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">

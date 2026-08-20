@@ -32,7 +32,7 @@ export default function ApplyForm({ jobs }: { jobs: Job[] }) {
         setSent(true);
         form.reset();
       }}
-      className="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-8 shadow-soft"
+      className="scroll-mt-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-soft sm:p-8"
     >
       <h2 className="text-2xl text-ink">Apply for a role</h2>
       <p className="mt-2 text-sm text-muted-foreground">

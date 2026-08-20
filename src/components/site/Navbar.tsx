@@ -19,7 +19,7 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`group relative inline-flex items-center pb-1 text-[0.78rem] font-medium uppercase tracking-[0.14em] transition ${
+      className={`group relative inline-flex items-center pb-1 text-[0.68rem] font-medium uppercase tracking-[0.1em] transition xl:text-[0.78rem] xl:tracking-[0.14em] ${
         active ? "text-brand" : "text-ink/75 hover:text-brand"
       }`}
     >
@@ -53,6 +53,13 @@ export function Navbar() {
     setInd(false);
   }, [pathname]);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const servicesActive = pathname === "/services" || pathname.startsWith("/services/");
   const industriesActive = pathname === "/industries" || pathname.startsWith("/industries/");
 
@@ -62,8 +69,8 @@ export function Navbar() {
         solid ? "border-border bg-white/95 shadow-soft backdrop-blur" : "border-transparent bg-white"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center gap-6 px-5 py-3 lg:px-8">
-        <Link href="/" className="relative block h-11 w-[148px] shrink-0" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-5 lg:px-8">
+        <Link href="/" className="relative block h-9 w-[120px] shrink-0 sm:h-11 sm:w-[148px]" onClick={() => setOpen(false)}>
           <Image
             src="/logo/jobtech-logo.png"
             alt="Jobtech"
@@ -73,7 +80,7 @@ export function Navbar() {
           />
         </Link>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-7 xl:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-4 lg:flex xl:gap-x-7">
           <NavItem href="/" active={pathname === "/"}>
             Home
           </NavItem>
@@ -85,7 +92,7 @@ export function Navbar() {
             <NavItem href="/services" active={servicesActive}>
               Services <ChevronDown className="ml-1 h-3.5 w-3.5" />
             </NavItem>
-            <div className="invisible absolute left-1/2 top-full z-20 w-96 -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100">
+            <div className="invisible absolute left-1/2 top-full z-20 w-[min(24rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 opacity-0 transition group-hover:visible group-hover:opacity-100">
               <div className="rounded-xl border border-border bg-white p-2 shadow-lift">
                 {services.map((s) => (
                   <Link
@@ -135,14 +142,14 @@ export function Navbar() {
           type="button"
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className="ml-auto grid h-10 w-10 place-items-center rounded-lg border border-border text-brand xl:hidden"
+          className="ml-auto grid h-10 w-10 place-items-center rounded-lg border border-border text-brand lg:hidden"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open ? (
-        <div className="max-h-[80vh] overflow-y-auto border-t border-border bg-white px-5 py-4 xl:hidden">
+        <div className="max-h-[min(80vh,calc(100svh-4rem))] overflow-y-auto border-t border-border bg-white px-4 py-4 sm:px-5 lg:hidden">
           <div className="flex flex-col gap-1">
             {[
               ["/", "Home"],

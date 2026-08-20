@@ -13,7 +13,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen">{children}</main>
+      <main className="min-h-screen overflow-x-hidden">{children}</main>
       <Footer />
       <FloatingActions />
     </>

@@ -8,11 +8,11 @@ const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
 
 export function FloatingActions() {
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-3 z-40 flex flex-col items-end gap-2.5 sm:bottom-5 sm:right-5 sm:gap-3">
       <a
         href={`tel:${company.phone.replace(/\s/g, "")}`}
         aria-label="Call Jobtech"
-        className="grid h-12 w-12 place-items-center rounded-full bg-slate-900 text-white shadow-lift transition hover:bg-slate-800"
+        className="grid h-11 w-11 place-items-center rounded-full bg-slate-900 text-white shadow-lift transition hover:bg-slate-800 sm:h-12 sm:w-12"
       >
         <Phone className="h-5 w-5" />
       </a>
@@ -21,7 +21,7 @@ export function FloatingActions() {
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp Jobtech"
-        className="grid h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition hover:bg-[#1ebe5d]"
+        className="grid h-11 w-11 place-items-center rounded-full bg-[#25D366] text-white shadow-lift transition hover:bg-[#1ebe5d] sm:h-12 sm:w-12"
       >
         <WhatsAppIcon />
       </a>

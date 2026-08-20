@@ -6,7 +6,24 @@ import { Briefcase, ChevronLeft, ChevronRight, MapPin, Wallet } from "lucide-rea
 import { Container, SectionHeading } from "@/components/site/ui";
 import type { Job } from "@/lib/types";
 
-const PAGE = 4;
+const PAGE_LG = 4;
+const PAGE_SM = 2;
+const PAGE_XS = 1;
+
+function usePageSize() {
+  const [size, setSize] = useState(PAGE_XS);
+  useEffect(() => {
+    const apply = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches) setSize(PAGE_LG);
+      else if (window.matchMedia("(min-width: 640px)").matches) setSize(PAGE_SM);
+      else setSize(PAGE_XS);
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, []);
+  return size;
+}
 
 function JobCard({ job }: { job: Job }) {
   const href = `/careers?role=${encodeURIComponent(job.title)}#apply`;
@@ -14,7 +31,7 @@ function JobCard({ job }: { job: Job }) {
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col rounded-2xl border border-violet-100 bg-white p-6 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lift"
+      className="group flex h-full flex-col rounded-2xl border border-violet-100 bg-white p-5 shadow-soft transition duration-300 hover:-translate-y-1 hover:border-brand/30 hover:shadow-lift sm:p-6"
     >
       <p className="text-[0.65rem] font-semibold tracking-[0.16em] text-brand uppercase">
         {job.industry}
@@ -43,17 +60,22 @@ function JobCard({ job }: { job: Job }) {
 }
 
 export function JobSlider({ jobs, heading = true }: { jobs: Job[]; heading?: boolean }) {
+  const perPage = usePageSize();
   const pages = useMemo(() => {
     const chunks: Job[][] = [];
-    for (let i = 0; i < jobs.length; i += PAGE) {
-      chunks.push(jobs.slice(i, i + PAGE));
+    for (let i = 0; i < jobs.length; i += perPage) {
+      chunks.push(jobs.slice(i, i + perPage));
     }
     return chunks;
-  }, [jobs]);
+  }, [jobs, perPage]);
 
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
   const last = Math.max(pages.length - 1, 0);
+
+  useEffect(() => {
+    setPage(0);
+  }, [perPage]);
 
   useEffect(() => {
     if (pages.length < 2 || paused) return;
@@ -66,13 +88,13 @@ export function JobSlider({ jobs, heading = true }: { jobs: Job[]; heading?: boo
   if (!jobs.length) return null;
 
   return (
-    <section className="relative overflow-hidden bg-ink py-24 text-white lg:py-28">
+    <section className="relative overflow-hidden bg-ink py-14 text-white sm:py-20 lg:py-28">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_10%,rgba(124,58,237,0.35),transparent_45%),radial-gradient(circle_at_10%_90%,rgba(6,182,212,0.18),transparent_40%)]" />
       <Container className="relative">
         {heading ? (
-          <div className="flex items-end justify-between gap-6">
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
             <SectionHeading light eyebrow="Careers" title="Current openings" />
-            <Link href="/careers" className="hidden text-sm font-semibold text-cyan-300 sm:block">
+            <Link href="/careers" className="text-sm font-semibold text-cyan-300 sm:block">
               All roles →
             </Link>
           </div>
@@ -91,7 +113,7 @@ export function JobSlider({ jobs, heading = true }: { jobs: Job[]; heading?: boo
               {pages.map((group, i) => (
                 <div
                   key={i}
-                  className="grid w-full min-w-full shrink-0 basis-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+                  className="grid w-full min-w-full shrink-0 basis-full grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4"
                 >
                   {group.map((job) => (
                     <JobCard key={job.id} job={job} />

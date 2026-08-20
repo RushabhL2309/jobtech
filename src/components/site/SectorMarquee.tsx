@@ -23,7 +23,7 @@ function SectorCard({
   return (
     <Link
       href={industry.href}
-      className="group relative h-80 w-72 shrink-0 overflow-hidden rounded-2xl shadow-soft"
+      className="group relative h-64 w-60 shrink-0 overflow-hidden rounded-2xl shadow-soft sm:h-80 sm:w-72"
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img

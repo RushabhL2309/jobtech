@@ -16,7 +16,12 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function CareersPage() {
-  const jobs = await getJobs();
+  let jobs: Awaited<ReturnType<typeof getJobs>> = [];
+  try {
+    jobs = await getJobs();
+  } catch (err) {
+    console.error("getJobs failed:", err);
+  }
   return (
     <>
       <PageHero

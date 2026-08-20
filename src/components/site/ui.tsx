@@ -10,7 +10,7 @@ export function Container({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={`mx-auto max-w-7xl px-5 lg:px-8 ${className}`}>{children}</div>;
+  return <div className={`mx-auto max-w-7xl px-4 sm:px-5 lg:px-8 ${className}`}>{children}</div>;
 }
 
 export function SectionHeading({
@@ -28,11 +28,11 @@ export function SectionHeading({
 }) {
   const center = align === "center";
   return (
-    <div className={center ? "mx-auto max-w-xl text-center" : "max-w-md"}>
+    <div className={center ? "mx-auto max-w-xl text-center" : "max-w-xl"}>
       {eyebrow ? (
         <p className={`eyebrow ${light ? "text-cyan-200" : ""}`}>{eyebrow}</p>
       ) : null}
-      <h2 className={`mt-3 text-[1.85rem] leading-tight sm:text-[2.15rem] ${light ? "text-white" : ""}`}>
+      <h2 className={`mt-3 text-[1.55rem] leading-tight sm:text-[1.85rem] lg:text-[2.15rem] ${light ? "text-white" : ""}`}>
         {title}
       </h2>
       {intro ? (
@@ -58,23 +58,23 @@ export function PageHero({
   image?: string;
 }) {
   return (
-    <section className="relative flex min-h-[52svh] items-end overflow-hidden pt-28 pb-16 lg:min-h-[58svh] lg:pt-32 lg:pb-20">
+    <section className="relative flex min-h-[42svh] items-end overflow-hidden pt-24 pb-10 sm:min-h-[52svh] sm:pt-28 sm:pb-16 lg:min-h-[58svh] lg:pt-32 lg:pb-20">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={image}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/62 to-slate-950/25" />
       <Container className="relative">
         {eyebrow ? (
-          <p className="text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-cyan-200">
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-cyan-200 sm:text-[0.72rem]">
             {eyebrow}
           </p>
         ) : null}
-        <h1 className="mt-3 max-w-4xl text-3xl leading-tight text-white sm:text-5xl">{title}</h1>
+        <h1 className="mt-3 max-w-4xl text-[1.7rem] leading-tight text-white sm:text-4xl lg:text-5xl">{title}</h1>
         {intro ? (
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/80 sm:text-lg">{intro}</p>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base lg:text-lg">{intro}</p>
         ) : null}
       </Container>
     </section>
@@ -89,28 +89,28 @@ export function CtaBand({
   intro?: string;
 }) {
   return (
-    <section className="bg-[#f4f2f7] pt-16 pb-24 lg:pt-20 lg:pb-28">
+    <section className="bg-[#f4f2f7] pt-12 pb-24 sm:pt-16 sm:pb-28 lg:pt-20">
       <Container>
-        <div className="relative overflow-hidden rounded-2xl bg-slate-950 px-8 py-12 text-white sm:px-12 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:px-14 lg:py-16">
+        <div className="relative overflow-hidden rounded-2xl bg-slate-950 px-5 py-8 text-white sm:px-12 sm:py-12 lg:flex lg:items-center lg:justify-between lg:gap-10 lg:px-14 lg:py-16">
           <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-cyan-400/15 blur-2xl" />
           <div className="absolute -bottom-12 left-1/3 h-32 w-32 rounded-full bg-blue-800/30 blur-2xl" />
           <div className="relative max-w-xl">
             <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-cyan-300">
               Get in touch
             </p>
-            <h2 className="mt-3 text-2xl text-white sm:text-3xl">{title}</h2>
+            <h2 className="mt-3 text-xl text-white sm:text-2xl lg:text-3xl">{title}</h2>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-white/75">{intro}</p>
           </div>
-          <div className="relative mt-8 flex flex-wrap gap-3 lg:mt-0 lg:shrink-0">
+          <div className="relative mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap lg:mt-0 lg:shrink-0">
             <Link
               href="/contact-us"
-              className="rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-slate-900 transition hover:bg-cyan-300"
+              className="rounded-full bg-white px-6 py-3.5 text-center text-sm font-semibold text-slate-900 transition hover:bg-cyan-300"
             >
               Request a Consultation
             </Link>
             <a
               href="tel:+912225560000"
-              className="rounded-full border border-white/40 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+              className="rounded-full border border-white/40 px-6 py-3.5 text-center text-sm font-semibold text-white transition hover:bg-white/10"
             >
               Call Our Team
             </a>

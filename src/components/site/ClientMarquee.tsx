@@ -19,7 +19,7 @@ function MarqueeRow({
         {loop.map((name, i) => (
           <div
             key={`${name}-${i}`}
-            className="grid min-h-32 min-w-64 place-items-center rounded-3xl border border-violet-100 bg-white px-10 text-center text-base font-semibold text-brand shadow-soft sm:min-h-36 sm:min-w-72 sm:text-lg"
+            className="grid min-h-24 min-w-48 place-items-center rounded-2xl border border-violet-100 bg-white px-5 text-center text-sm font-semibold text-brand shadow-soft sm:min-h-36 sm:min-w-72 sm:rounded-3xl sm:px-10 sm:text-lg"
           >
             {name}
           </div>
